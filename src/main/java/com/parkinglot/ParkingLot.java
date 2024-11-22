@@ -2,7 +2,6 @@ package com.parkinglot;
 
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Objects;
 
 public class ParkingLot {
     public static final String NO_AVAILABLE_POSITION = "No available position";
@@ -15,6 +14,11 @@ public class ParkingLot {
     public ParkingLot() {
         capacity = DEFAULT_CAPABILITY;
         restSlotNum = DEFAULT_CAPABILITY;
+    }
+
+    public ParkingLot(int capacity) {
+        this.capacity = capacity;
+        restSlotNum = capacity;
     }
 
     public Ticket park(Car car) {
@@ -36,5 +40,9 @@ public class ParkingLot {
 
     public int getRestSlotNum() {
         return restSlotNum;
+    }
+
+    public double getOccupationRate() {
+        return (double) restSlotNum / capacity;
     }
 }
