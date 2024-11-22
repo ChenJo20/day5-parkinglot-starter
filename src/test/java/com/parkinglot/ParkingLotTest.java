@@ -109,7 +109,7 @@ public class ParkingLotTest {
     }
 
     @Test
-    void should_print_message_when_fetch_given_a_used_ticket() throws Exception {
+    void should_throw_exception_with_message_when_fetch_given_an_used_ticket() throws Exception {
         // Given
         ParkingLot parkingLot = new ParkingLot();
         Car car = new Car();
@@ -124,7 +124,7 @@ public class ParkingLotTest {
     }
 
     @Test
-    void should_print_message_when_fetch_given_a_wrong_ticket() throws Exception {
+    void should_throw_exception_with_message_when_fetch_given_a_wrong_ticket() throws Exception {
         // Given
         ParkingLot parkingLot = new ParkingLot();
         Car car = new Car();
@@ -140,7 +140,7 @@ public class ParkingLotTest {
     }
 
     @Test
-    void should_print_message_when_park_given_a_full_parking_lot() throws Exception {
+    void should_throw_exception_with_message_when_park_given_a_full_parking_lot() throws Exception {
         ParkingLot parkingLot = new ParkingLot();
         parkingLot.park(new Car());
         parkingLot.park(new Car());
