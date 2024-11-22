@@ -45,7 +45,7 @@ public class ParkingBoyTest {
     }
 
     @Test
-    void should_return_right_car_when_park_given_two_cars_and_two_lots_and_each_lot_has_one_car() {
+    void should_return_right_car_when_fetch_given_two_cars_and_two_lots_and_each_lot_has_one_car() {
         // Given
         ParkingLot parkingLot1 = new ParkingLot();
         ParkingLot parkingLot2 = new ParkingLot();
