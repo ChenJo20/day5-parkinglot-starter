@@ -5,6 +5,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import static com.parkinglot.ParkingLot.UNRECOGNIZED_PARKING_TICKET;
+
 public class ParkingBoy {
     private List<ParkingLot> parkingLots = new ArrayList<>();
     private Map<Ticket, ParkingLot> ticketToParkingLot = new HashMap<>();
@@ -28,7 +30,11 @@ public class ParkingBoy {
     }
 
     public Car fetch(Ticket ticket) {
-        ParkingLot parkingLot = ticketToParkingLot.get(ticket);
+        ParkingLot parkingLot = ticketToParkingLot.getOrDefault(ticket, null);
+        if(parkingLot == null) {
+            throw new UnrecognizedTicketException(UNRECOGNIZED_PARKING_TICKET);
+        }
+
         Car car = parkingLot.fetch(ticket);
         ticketToParkingLot.remove(ticket);
         return car;

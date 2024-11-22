@@ -6,8 +6,8 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.stream.IntStream;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static com.parkinglot.ParkingLot.UNRECOGNIZED_PARKING_TICKET;
+import static org.junit.jupiter.api.Assertions.*;
 
 public class ParkingBoyTest {
     @Test
@@ -61,6 +61,19 @@ public class ParkingBoyTest {
         // Then
         assertEquals(fetchedCarInLot2, carInLot2);
         assertEquals(fetchedCarInLot1, carInLot1);
+    }
+
+    @Test
+    void should_throw_unrecognized_ticket_exception_when_fetch_given_two_empty_lots_a_wrong_ticket() {
+        // Given
+        ParkingLot parkingLot1 = new ParkingLot();
+        ParkingLot parkingLot2 = new ParkingLot();
+        List<ParkingLot> parkingLots = Arrays.asList(parkingLot1, parkingLot2);
+        ParkingBoy parkingBoy = new ParkingBoy(parkingLots);
+        Ticket wrongTicket = new Ticket();
+        assertThrows(UnrecognizedTicketException.class,
+                () -> parkingBoy.fetch(wrongTicket), UNRECOGNIZED_PARKING_TICKET);
+
     }
 
 //    @Test
