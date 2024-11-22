@@ -17,7 +17,7 @@ public class ParkingBoyTest {
     }
 
     @Test
-    void should_return_car_when_fetch_given_and_a_ticket(){
+    void should_return_car_when_fetch_given_a_ticket(){
         // Given
         ParkingBoy parkingBoy = new ParkingBoy();
         Car car = new Car();
