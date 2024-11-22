@@ -70,4 +70,22 @@ public class ParkingBoyTest {
                 () -> parkingBoy.fetch(wrongTicket), UNRECOGNIZED_PARKING_TICKET);
 
     }
+
+    @Test
+    void should_throw_exception_with_message_when_park_given_a_full_parking_lot() {
+        ParkingBoy parkingBoy = new ParkingBoy();
+        parkingBoy.park(new Car());
+        parkingBoy.park(new Car());
+        parkingBoy.park(new Car());
+        parkingBoy.park(new Car());
+        parkingBoy.park(new Car());
+        parkingBoy.park(new Car());
+        parkingBoy.park(new Car());
+        parkingBoy.park(new Car());
+        parkingBoy.park(new Car());
+        parkingBoy.park(new Car());
+
+        assertThrows(NoAvailableException.class,
+                () -> parkingBoy.park(new Car()), NO_AVAILABLE_POSITION);
+    }
 }
