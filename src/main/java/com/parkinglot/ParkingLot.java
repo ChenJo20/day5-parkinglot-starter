@@ -17,9 +17,9 @@ public class ParkingLot {
         restSlotNum = DEFAULT_CAPABILITY;
     }
 
-    public Ticket park(Car car) throws Exception {
+    public Ticket park(Car car) {
         if (restSlotNum == 0) {
-            throw new Exception(NO_AVAILABLE_POSITION);
+            throw new NoAvailableException(NO_AVAILABLE_POSITION);
         }
         Ticket ticket = new Ticket();
         ticketToCar.put(ticket, car);
@@ -27,12 +27,12 @@ public class ParkingLot {
         return ticket;
     }
 
-    public Car fetch(Ticket ticket) throws Exception {
+    public Car fetch(Ticket ticket) {
         Car fetchedCar = ticketToCar.remove(ticket);
         if (Objects.nonNull(fetchedCar)) {
             restSlotNum++;
         } else {
-            throw new Exception(UNRECOGNIZED_PARKING_TICKET);
+            throw new UnrecognizedTicketException(UNRECOGNIZED_PARKING_TICKET);
         }
         return fetchedCar;
     }
