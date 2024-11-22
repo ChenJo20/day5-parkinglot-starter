@@ -59,4 +59,15 @@ public class ParkingBoyTest {
                 () -> parkingBoy.fetch(ticket), UNRECOGNIZED_PARKING_TICKET);
     }
 
+    @Test
+    void should_throw_exception_with_message_when_fetch_given_a_wrong_ticket() {
+        // Given
+        ParkingBoy parkingBoy = new ParkingBoy();
+        Car car = new Car();
+        parkingBoy.park(car);
+        Ticket wrongTicket = new Ticket();
+        assertThrows(UnrecognizedTicketException.class,
+                () -> parkingBoy.fetch(wrongTicket), UNRECOGNIZED_PARKING_TICKET);
+
+    }
 }
