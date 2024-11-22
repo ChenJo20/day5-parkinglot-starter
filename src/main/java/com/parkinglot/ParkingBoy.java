@@ -1,14 +1,20 @@
 package com.parkinglot;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class ParkingBoy {
+    private List<ParkingLot> parkingLots = new ArrayList<>();
 
-    private ParkingLot parkingLot = new ParkingLot();
-
-    public Ticket park(Car car) {
-        return parkingLot.park(car);
+    public ParkingBoy(List<ParkingLot> parkingLots) {
+        this.parkingLots = parkingLots;
     }
 
-    public Car fetch(Ticket ticket) {
-        return parkingLot.fetch(ticket);
+
+    public Ticket park(Car car) {
+        ParkingLot firstAvailableParkingLot = parkingLots.stream()
+                .filter(ParkingLot::isAvailable)
+                .findFirst().orElse(null);
+        return firstAvailableParkingLot.park(car);
     }
 }

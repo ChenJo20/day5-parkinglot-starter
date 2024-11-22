@@ -18,7 +18,7 @@ public class ParkingLot {
     }
 
     public Ticket park(Car car) {
-        if (restSlotNum == 0) {
+        if (!isAvailable()) {
             throw new NoAvailableException(NO_AVAILABLE_POSITION);
         }
         Ticket ticket = new Ticket();
@@ -35,5 +35,9 @@ public class ParkingLot {
             throw new UnrecognizedTicketException(UNRECOGNIZED_PARKING_TICKET);
         }
         return fetchedCar;
+    }
+
+    public boolean isAvailable() {
+        return restSlotNum != 0;
     }
 }
