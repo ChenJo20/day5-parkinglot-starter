@@ -43,6 +43,26 @@ public class ParkingBoyTest {
         assertEquals(fetchedCar, car);
     }
 
+    @Test
+    void should_return_right_car_when_park_given_two_cars_and_two_lots_and_each_lot_has_one_car() {
+        // Given
+        ParkingLot parkingLot1 = new ParkingLot();
+        ParkingLot parkingLot2 = new ParkingLot();
+        List<ParkingLot> parkingLots = Arrays.asList(parkingLot1, parkingLot2);
+        ParkingBoy parkingBoy = new ParkingBoy(parkingLots);
+        Car carInLot1 = new Car();
+        Ticket ticketForFirstCarInLot1 = parkingBoy.park(carInLot1);
+        IntStream.rangeClosed(0, 8).forEach(i -> parkingLot1.park(new Car()));
+        Car carInLot2 = new Car();
+        Ticket ticketForFirstCarInLot2 = parkingBoy.park(carInLot2);
+        // When
+        Car fetchedCarInLot2 = parkingBoy.fetch(ticketForFirstCarInLot2);
+        Car fetchedCarInLot1 = parkingBoy.fetch(ticketForFirstCarInLot1);
+        // Then
+        assertEquals(fetchedCarInLot2, carInLot2);
+        assertEquals(fetchedCarInLot1, carInLot1);
+    }
+
 //    @Test
 //    void should_return_car_when_fetch_given_a_ticket() {
 //        // Given
