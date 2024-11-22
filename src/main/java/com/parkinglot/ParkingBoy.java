@@ -31,13 +31,10 @@ public class ParkingBoy {
     }
 
     public Car fetch(Ticket ticket) {
-        ParkingLot parkingLot = ticketToParkingLot.getOrDefault(ticket, null);
+        ParkingLot parkingLot = ticketToParkingLot.remove(ticket);
         if (parkingLot == null) {
             throw new UnrecognizedTicketException(UNRECOGNIZED_PARKING_TICKET);
         }
-
-        Car car = parkingLot.fetch(ticket);
-        ticketToParkingLot.remove(ticket);
-        return car;
+        return parkingLot.fetch(ticket);
     }
 }
