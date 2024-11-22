@@ -63,52 +63,6 @@ public class ParkingLotTest {
     }
 
     @Test
-    void should_return_nothing__when_fetch_given_wrong_ticket() {
-        // Given
-        ParkingLot parkingLot = new ParkingLot();
-        Car car = new Car();
-        Ticket ticket = parkingLot.park(car);
-        Ticket wrongTicket = new Ticket();
-        // When
-        Car fetchedCar = parkingLot.fetch(wrongTicket);
-        // Then
-        assertNull(fetchedCar);
-    }
-
-    @Test
-    void should_return_nothing_when_fetch_given_an_used_ticket() {
-        // Given
-        ParkingLot parkingLot = new ParkingLot();
-        Car car = new Car();
-        Ticket ticket = parkingLot.park(car);
-        parkingLot.fetch(ticket);
-        // When
-        Car fetchedCar = parkingLot.fetch(ticket);
-        // Then
-        assertNull(fetchedCar);
-    }
-
-    @Test
-    void should_return_nothing_when_park_given_full_parking_lot() {
-        // Given
-        ParkingLot parkingLot = new ParkingLot();
-        parkingLot.park(new Car());
-        parkingLot.park(new Car());
-        parkingLot.park(new Car());
-        parkingLot.park(new Car());
-        parkingLot.park(new Car());
-        parkingLot.park(new Car());
-        parkingLot.park(new Car());
-        parkingLot.park(new Car());
-        parkingLot.park(new Car());
-        parkingLot.park(new Car());
-        // When
-        Ticket ticket = parkingLot.park(new Car());
-        // Then
-        assertNull(ticket);
-    }
-
-    @Test
     void should_throw_exception_with_message_when_fetch_given_an_used_ticket() {
         // Given
         ParkingLot parkingLot = new ParkingLot();
