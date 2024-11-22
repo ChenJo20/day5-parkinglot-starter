@@ -14,16 +14,16 @@ public class ParkingLotTest {
     private ByteArrayOutputStream outContent = new ByteArrayOutputStream();
 
     @BeforeEach
-    public void setup() throws Exception {
+    public void setup() {
         System.setOut(new PrintStream(outContent));
     }
 
-    private String systemOut() throws Exception {
+    private String systemOut() {
         return outContent.toString();
     }
 
     @Test
-    void should_return_ticket_when_park_given_a_car() throws Exception {
+    void should_return_ticket_when_park_given_a_car() {
         // Given
         ParkingLot parkinglot = new ParkingLot();
         Car car = new Car();
@@ -34,7 +34,7 @@ public class ParkingLotTest {
     }
 
     @Test
-    void should_return_the_car_when_fetch_given_a_ticket() throws Exception {
+    void should_return_the_car_when_fetch_given_a_ticket() {
         // Given
         ParkingLot parkingLot = new ParkingLot();
         Car car = new Car();
@@ -46,7 +46,7 @@ public class ParkingLotTest {
     }
 
     @Test
-    void should_return_right_car_when_fetch_given_two_ticket() throws Exception {
+    void should_return_right_car_when_fetch_given_two_ticket() {
         // Given
         ParkingLot parkingLot = new ParkingLot();
         Car car1 = new Car();
@@ -63,7 +63,7 @@ public class ParkingLotTest {
     }
 
     @Test
-    void should_return_nothing__when_fetch_given_wrong_ticket() throws Exception {
+    void should_return_nothing__when_fetch_given_wrong_ticket() {
         // Given
         ParkingLot parkingLot = new ParkingLot();
         Car car = new Car();
@@ -76,7 +76,7 @@ public class ParkingLotTest {
     }
 
     @Test
-    void should_return_nothing_when_fetch_given_an_used_ticket() throws Exception {
+    void should_return_nothing_when_fetch_given_an_used_ticket() {
         // Given
         ParkingLot parkingLot = new ParkingLot();
         Car car = new Car();
@@ -89,7 +89,7 @@ public class ParkingLotTest {
     }
 
     @Test
-    void should_return_nothing_when_park_given_full_parking_lot() throws Exception {
+    void should_return_nothing_when_park_given_full_parking_lot() {
         // Given
         ParkingLot parkingLot = new ParkingLot();
         parkingLot.park(new Car());
@@ -109,33 +109,31 @@ public class ParkingLotTest {
     }
 
     @Test
-    void should_throw_exception_with_message_when_fetch_given_an_used_ticket() throws Exception {
+    void should_throw_exception_with_message_when_fetch_given_an_used_ticket() {
         // Given
         ParkingLot parkingLot = new ParkingLot();
         Car car = new Car();
         Ticket ticket = parkingLot.park(car);
         parkingLot.fetch(ticket);
 
-        UnrecognizedTicketException unrecognizedTicketException = assertThrows(UnrecognizedTicketException.class,
-                () -> parkingLot.fetch(ticket));
-        assertEquals(UNRECOGNIZED_PARKING_TICKET, unrecognizedTicketException.getMessage());
+        assertThrows(UnrecognizedTicketException.class,
+                () -> parkingLot.fetch(ticket), UNRECOGNIZED_PARKING_TICKET);
     }
 
     @Test
-    void should_throw_exception_with_message_when_fetch_given_a_wrong_ticket() throws Exception {
+    void should_throw_exception_with_message_when_fetch_given_a_wrong_ticket() {
         // Given
         ParkingLot parkingLot = new ParkingLot();
         Car car = new Car();
         parkingLot.park(car);
         Ticket wrongTicket = new Ticket();
-        UnrecognizedTicketException unrecognizedTicketException = assertThrows(UnrecognizedTicketException.class,
-                () -> parkingLot.fetch(wrongTicket));
-        assertEquals(UNRECOGNIZED_PARKING_TICKET, unrecognizedTicketException.getMessage());
+        assertThrows(UnrecognizedTicketException.class,
+                () -> parkingLot.fetch(wrongTicket), UNRECOGNIZED_PARKING_TICKET);
 
     }
 
     @Test
-    void should_throw_exception_with_message_when_park_given_a_full_parking_lot() throws Exception {
+    void should_throw_exception_with_message_when_park_given_a_full_parking_lot() {
         ParkingLot parkingLot = new ParkingLot();
         parkingLot.park(new Car());
         parkingLot.park(new Car());
@@ -148,9 +146,7 @@ public class ParkingLotTest {
         parkingLot.park(new Car());
         parkingLot.park(new Car());
 
-        NoAvailableException noAvailableException = assertThrows(NoAvailableException.class,
-                () -> parkingLot.park(new Car()));
-        assertEquals(NO_AVAILABLE_POSITION, noAvailableException.getMessage());
-
+        assertThrows(NoAvailableException.class,
+                () -> parkingLot.park(new Car()), NO_AVAILABLE_POSITION);
     }
 }
