@@ -4,10 +4,10 @@ import org.junit.jupiter.api.Test;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.stream.IntStream;
 
-import static com.parkinglot.ParkingLot.NO_AVAILABLE_POSITION;
-import static com.parkinglot.ParkingLot.UNRECOGNIZED_PARKING_TICKET;
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 public class ParkingBoyTest {
     @Test
@@ -21,6 +21,23 @@ public class ParkingBoyTest {
         // When
         Ticket ticket = parkingBoy.park(car);
         Car fetchedCar = parkingLot1.fetch(ticket);
+        // Then
+        assertNotNull(ticket);
+        assertEquals(fetchedCar, car);
+    }
+
+    @Test
+    void should_return_ticket_and_park_in_second_when_park_given_a_car_and_first_lot_full_second_lot_empty() {
+        // Given
+        ParkingLot parkingLot1 = new ParkingLot();
+        ParkingLot parkingLot2 = new ParkingLot();
+        List<ParkingLot> parkingLots = Arrays.asList(parkingLot1, parkingLot2);
+        ParkingBoy parkingBoy = new ParkingBoy(parkingLots);
+        IntStream.rangeClosed(0, 9).forEach(i -> parkingLot1.park(new Car()));
+        Car car = new Car();
+        // When
+        Ticket ticket = parkingBoy.park(car);
+        Car fetchedCar = parkingLot2.fetch(ticket);
         // Then
         assertNotNull(ticket);
         assertEquals(fetchedCar, car);
