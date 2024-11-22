@@ -17,7 +17,7 @@ public class ParkingLot {
         restSlotNum = DEFAULT_CAPABILITY;
     }
 
-    public Ticket park(Car car) throws Exception{
+    public Ticket park(Car car) throws Exception {
         if (restSlotNum == 0) {
             throw new Exception(NO_AVAILABLE_POSITION);
         }
@@ -27,7 +27,7 @@ public class ParkingLot {
         return ticket;
     }
 
-    public Car fetch(Ticket ticket) throws Exception{
+    public Car fetch(Ticket ticket) throws Exception {
         Car fetchedCar = ticketToCar.remove(ticket);
         if (Objects.nonNull(fetchedCar)) {
             restSlotNum++;
