@@ -6,13 +6,14 @@ import java.util.Objects;
 
 public class ParkingLot {
 
-    private int capability;
+    public static final int DEFAULT_CAPABILITY = 10;
+    private int capacity;
     private int restSlotNum;
     private Map<Ticket, Car> ticketToCar = new HashMap<>();
 
     public ParkingLot() {
-        capability = 10;
-        restSlotNum = 10;
+        capacity = DEFAULT_CAPABILITY;
+        restSlotNum = DEFAULT_CAPABILITY;
     }
 
     public Ticket park(Car car) {
