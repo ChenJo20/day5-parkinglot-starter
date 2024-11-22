@@ -72,6 +72,9 @@ public class ParkingBoyTest {
         List<ParkingLot> parkingLots = Arrays.asList(parkingLot1, parkingLot2);
         ParkingBoy parkingBoy = new ParkingBoy(parkingLots);
         Ticket wrongTicket = new Ticket();
+
+        // When
+        // Then
         assertThrows(UnrecognizedTicketException.class,
                 () -> parkingBoy.fetch(wrongTicket), UNRECOGNIZED_PARKING_TICKET);
 
@@ -86,6 +89,9 @@ public class ParkingBoyTest {
         ParkingBoy parkingBoy = new ParkingBoy(parkingLots);
         Ticket ticket = parkingBoy.park(new Car());
         parkingBoy.fetch(ticket);
+
+        // When
+        // Then
         assertThrows(UnrecognizedTicketException.class,
                 () -> parkingBoy.fetch(ticket), UNRECOGNIZED_PARKING_TICKET);
 
@@ -101,6 +107,8 @@ public class ParkingBoyTest {
         List<ParkingLot> parkingLots = Arrays.asList(parkingLot1, parkingLot2);
         ParkingBoy parkingBoy = new ParkingBoy(parkingLots);
 
+        // When
+        // Then
         assertThrows(NoAvailableException.class,
                 () -> parkingBoy.park(new Car()), NO_AVAILABLE_POSITION);
 
