@@ -27,9 +27,8 @@ public class ParkingLot {
     }
 
     public Car fetch(Ticket ticket) {
-        Car fetchedCar = ticketToCar.getOrDefault(ticket, null);
+        Car fetchedCar = ticketToCar.remove(ticket);
         if (Objects.nonNull(fetchedCar)) {
-            ticketToCar.remove(ticket);
             restSlotNum++;
         }
         return fetchedCar;
