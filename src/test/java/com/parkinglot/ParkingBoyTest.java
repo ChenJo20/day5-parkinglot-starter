@@ -6,6 +6,7 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.stream.IntStream;
 
+import static com.parkinglot.ParkingLot.NO_AVAILABLE_POSITION;
 import static com.parkinglot.ParkingLot.UNRECOGNIZED_PARKING_TICKET;
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -87,6 +88,21 @@ public class ParkingBoyTest {
         parkingBoy.fetch(ticket);
         assertThrows(UnrecognizedTicketException.class,
                 () -> parkingBoy.fetch(ticket), UNRECOGNIZED_PARKING_TICKET);
+
+    }
+
+    @Test
+    void should_throw_no_available_position_exception_when_fetch_given_two_full_lots() {
+        // Given
+        ParkingLot parkingLot1 = new ParkingLot();
+        ParkingLot parkingLot2 = new ParkingLot();
+        IntStream.rangeClosed(0, 9).forEach(i -> parkingLot1.park(new Car()));
+        IntStream.rangeClosed(0, 9).forEach(i -> parkingLot2.park(new Car()));
+        List<ParkingLot> parkingLots = Arrays.asList(parkingLot1, parkingLot2);
+        ParkingBoy parkingBoy = new ParkingBoy(parkingLots);
+
+        assertThrows(NoAvailableException.class,
+                () -> parkingBoy.park(new Car()), NO_AVAILABLE_POSITION);
 
     }
 
