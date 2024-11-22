@@ -41,4 +41,21 @@ public class SmartParkingBoyTest {
         // Then
         assertEquals(fetchedCar, car);
     }
+
+    @Test
+    void should_park_in_lot1_when_park_given_a_car_and_lot1_10_available_positions_and_lot2_9_available_positions() {
+        // Given
+        ParkingLot parkingLot1 = new ParkingLot();
+        ParkingLot parkingLot2 = new ParkingLot();
+        parkingLot2.park(new Car());
+        List<ParkingLot> parkingLots = Arrays.asList(parkingLot1, parkingLot2);
+        SmartParkingBoy smartParkingBoy = new SmartParkingBoy(parkingLots);
+
+        // When
+        Car car = new Car();
+        Ticket ticket = smartParkingBoy.park(car);
+        Car fetchedCar = parkingLot1.fetch(ticket);
+        // Then
+        assertEquals(fetchedCar, car);
+    }
 }
