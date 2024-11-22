@@ -9,8 +9,8 @@ import static com.parkinglot.ParkingLot.NO_AVAILABLE_POSITION;
 import static com.parkinglot.ParkingLot.UNRECOGNIZED_PARKING_TICKET;
 
 public class ParkingBoy {
-    private List<ParkingLot> parkingLots = new ArrayList<>();
-    private Map<Ticket, ParkingLot> ticketToParkingLot = new HashMap<>();
+    protected List<ParkingLot> parkingLots = new ArrayList<>();
+    protected Map<Ticket, ParkingLot> ticketToParkingLot = new HashMap<>();
 
     public ParkingBoy(List<ParkingLot> parkingLots) {
         this.parkingLots = parkingLots;

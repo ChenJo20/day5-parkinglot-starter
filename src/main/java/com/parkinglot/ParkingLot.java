@@ -33,4 +33,8 @@ public class ParkingLot {
     public boolean isAvailable() {
         return restSlotNum != 0;
     }
+
+    public int getRestSlotNum() {
+        return restSlotNum;
+    }
 }
