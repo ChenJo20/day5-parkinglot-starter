@@ -2,8 +2,10 @@ package com.parkinglot;
 
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static com.parkinglot.ParkingLot.NO_AVAILABLE_POSITION;
+import static com.parkinglot.ParkingLot.UNRECOGNIZED_PARKING_TICKET;
+import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 public class ParkingBoyTest {
     @Test
@@ -44,4 +46,17 @@ public class ParkingBoyTest {
         assertEquals(fetchedCar1, car1);
         assertEquals(fetchedCar2, car2);
     }
+
+    @Test
+    void should_throw_exception_with_message_when_fetch_given_an_used_ticket() {
+        // Given
+        ParkingBoy parkingBoy = new ParkingBoy();
+        Car car = new Car();
+        Ticket ticket = parkingBoy.park(car);
+        parkingBoy.fetch(ticket);
+
+        assertThrows(UnrecognizedTicketException.class,
+                () -> parkingBoy.fetch(ticket), UNRECOGNIZED_PARKING_TICKET);
+    }
+
 }
