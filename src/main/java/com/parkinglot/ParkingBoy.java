@@ -1,5 +1,6 @@
 package com.parkinglot;
 
+import com.parkinglot.parkinglotSearchStrategy.KeepInitialOrderStrategy;
 import com.parkinglot.parkinglotSearchStrategy.ParkingLotSortStrategy;
 
 import java.util.ArrayList;
@@ -17,6 +18,7 @@ public class ParkingBoy {
 
     public ParkingBoy(List<ParkingLot> parkingLots) {
         this.parkingLots = parkingLots;
+        searchStrategy = new KeepInitialOrderStrategy();
     }
 
     public ParkingBoy(List<ParkingLot> parkingLots, ParkingLotSortStrategy searchStrategy) {

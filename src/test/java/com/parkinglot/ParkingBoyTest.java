@@ -1,5 +1,6 @@
 package com.parkinglot;
 
+import com.parkinglot.parkinglotSearchStrategy.KeepInitialOrderStrategy;
 import com.parkinglot.parkinglotSearchStrategy.MaxAvailablePositionsStrategy;
 import com.parkinglot.parkinglotSearchStrategy.MaxOccupationRateStrategy;
 import org.junit.jupiter.api.Test;
@@ -47,12 +48,12 @@ public class ParkingBoyTest {
     }
 
     @Test
-    void should_return_right_car_when_fetch_given_two_cars_and_two_lots_and_each_lot_has_one_car() {
+    void should_return_right_car_when_fetch_given_two_cars_and_two_lots_and_each_lot_has_one_car_using_keep_initial_order() {
         // Given
         ParkingLot parkingLot1 = new ParkingLot();
         ParkingLot parkingLot2 = new ParkingLot();
         List<ParkingLot> parkingLots = Arrays.asList(parkingLot1, parkingLot2);
-        ParkingBoy parkingBoy = new ParkingBoy(parkingLots);
+        ParkingBoy parkingBoy = new ParkingBoy(parkingLots, new KeepInitialOrderStrategy());
         Car carInLot1 = new Car();
         Ticket ticketForFirstCarInLot1 = parkingBoy.park(carInLot1);
         IntStream.rangeClosed(0, 8).forEach(i -> parkingLot1.park(new Car()));
