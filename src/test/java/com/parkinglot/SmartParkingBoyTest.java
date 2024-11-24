@@ -107,7 +107,7 @@ public class SmartParkingBoyTest {
         IntStream.rangeClosed(0, 9).forEach(i -> parkingLot1.park(new Car()));
         IntStream.rangeClosed(0, 9).forEach(i -> parkingLot2.park(new Car()));
         List<ParkingLot> parkingLots = Arrays.asList(parkingLot1, parkingLot2);
-        ParkingBoy parkingBoy = new ParkingBoy(parkingLots);
+        SmartParkingBoy  parkingBoy = new SmartParkingBoy(parkingLots);
 
         // When
         // Then
