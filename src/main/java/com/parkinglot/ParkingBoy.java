@@ -1,5 +1,7 @@
 package com.parkinglot;
 
+import com.parkinglot.parkinglotSearchStrategy.ParkingLotSortStrategy;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -11,15 +13,21 @@ import static com.parkinglot.ParkingLot.UNRECOGNIZED_PARKING_TICKET;
 public class ParkingBoy {
     protected List<ParkingLot> parkingLots = new ArrayList<>();
     protected Map<Ticket, ParkingLot> ticketToParkingLot = new HashMap<>();
+    private ParkingLotSortStrategy searchStrategy;
 
     public ParkingBoy(List<ParkingLot> parkingLots) {
         this.parkingLots = parkingLots;
     }
 
+    public ParkingBoy(List<ParkingLot> parkingLots, ParkingLotSortStrategy searchStrategy) {
+        this.parkingLots = parkingLots;
+        this.searchStrategy = searchStrategy;
+    }
 
     public Ticket park(Car car) {
         ParkingLot firstAvailableParkingLot = parkingLots.stream()
                 .filter(ParkingLot::isAvailable)
+                .sorted(searchStrategy.sortParkingLot())
                 .findFirst().orElse(null);
         if (firstAvailableParkingLot == null) {
             throw new NoAvailableException(NO_AVAILABLE_POSITION);

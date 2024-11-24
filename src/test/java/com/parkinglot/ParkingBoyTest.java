@@ -1,5 +1,6 @@
 package com.parkinglot;
 
+import com.parkinglot.parkinglotSearchStrategy.MaxAvailablePositionsStrategy;
 import org.junit.jupiter.api.Test;
 
 import java.util.Arrays;
@@ -112,5 +113,25 @@ public class ParkingBoyTest {
         assertThrows(NoAvailableException.class,
                 () -> parkingBoy.park(new Car()), NO_AVAILABLE_POSITION);
 
+    }
+
+    @Test
+    void should_return_right_car_when_fetch_given_two_cars_and_two_lots_and_each_lot_has_one_car_using_max_sort_strategy() {
+        // Given
+        ParkingLot parkingLot1 = new ParkingLot(10);
+        ParkingLot parkingLot2 = new ParkingLot();
+        List<ParkingLot> parkingLots = Arrays.asList(parkingLot1, parkingLot2);
+        ParkingBoy parkingBoy = new ParkingBoy(parkingLots, new MaxAvailablePositionsStrategy());
+        Car carInLot1 = new Car();
+        Ticket ticketForFirstCarInLot1 = parkingBoy.park(carInLot1);
+        IntStream.rangeClosed(0, 8).forEach(i -> parkingLot1.park(new Car()));
+        Car carInLot2 = new Car();
+        Ticket ticketForFirstCarInLot2 = parkingBoy.park(carInLot2);
+        // When
+        Car fetchedCarInLot2 = parkingLot2.fetch(ticketForFirstCarInLot2);
+        Car fetchedCarInLot1 = parkingLot1.fetch(ticketForFirstCarInLot1);
+        // Then
+        assertEquals(fetchedCarInLot2, carInLot2);
+        assertEquals(fetchedCarInLot1, carInLot1);
     }
 }
