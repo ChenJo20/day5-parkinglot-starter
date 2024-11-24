@@ -75,7 +75,7 @@ public class SuperParkingBoyTest {
         ParkingLot parkingLot1 = new ParkingLot();
         ParkingLot parkingLot2 = new ParkingLot();
         List<ParkingLot> parkingLots = Arrays.asList(parkingLot1, parkingLot2);
-        SmartParkingBoy parkingBoy = new SmartParkingBoy(parkingLots);
+        SuperParkingBoy parkingBoy = new SuperParkingBoy(parkingLots);
         Ticket wrongTicket = new Ticket();
 
         // When
