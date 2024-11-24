@@ -1,6 +1,7 @@
 package com.parkinglot;
 
 import com.parkinglot.parkinglotSearchStrategy.MaxAvailablePositionsStrategy;
+import com.parkinglot.parkinglotSearchStrategy.MaxOccupationRateStrategy;
 import org.junit.jupiter.api.Test;
 
 import java.util.Arrays;
@@ -125,6 +126,27 @@ public class ParkingBoyTest {
         Car carInLot1 = new Car();
         Ticket ticketForFirstCarInLot1 = parkingBoy.park(carInLot1);
         IntStream.rangeClosed(0, 8).forEach(i -> parkingLot1.park(new Car()));
+        Car carInLot2 = new Car();
+        Ticket ticketForFirstCarInLot2 = parkingBoy.park(carInLot2);
+        // When
+        Car fetchedCarInLot2 = parkingLot2.fetch(ticketForFirstCarInLot2);
+        Car fetchedCarInLot1 = parkingLot1.fetch(ticketForFirstCarInLot1);
+        // Then
+        assertEquals(fetchedCarInLot2, carInLot2);
+        assertEquals(fetchedCarInLot1, carInLot1);
+    }
+
+    @Test
+    void should_return_right_car_when_fetch_given_two_cars_and_lot1_20_capacity_10_available_and_lot2_10_capacity_5_available_using_min_occupation_rate_sort_strategy() {
+        // Given
+        ParkingLot parkingLot1 = new ParkingLot(20);
+        IntStream.range(0, 10).forEach(i -> parkingLot1.park(new Car()));
+        ParkingLot parkingLot2 = new ParkingLot();
+        IntStream.range(0, 5).forEach(i -> parkingLot2.park(new Car()));
+        List<ParkingLot> parkingLots = Arrays.asList(parkingLot1, parkingLot2);
+        ParkingBoy parkingBoy = new ParkingBoy(parkingLots, new MaxOccupationRateStrategy());
+        Car carInLot1 = new Car();
+        Ticket ticketForFirstCarInLot1 = parkingBoy.park(carInLot1);
         Car carInLot2 = new Car();
         Ticket ticketForFirstCarInLot2 = parkingBoy.park(carInLot2);
         // When
