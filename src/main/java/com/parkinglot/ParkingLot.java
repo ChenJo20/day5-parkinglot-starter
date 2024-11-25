@@ -42,7 +42,7 @@ public class ParkingLot {
         return restPositionNum;
     }
 
-    public double getOccupationRate() {
+    public double getAvailableRate() {
         return (double) restPositionNum / capacity;
     }
 }
