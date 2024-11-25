@@ -15,10 +15,8 @@ public class SuperParkingBoy extends ParkingBoy {
     public Ticket park(Car car) {
         ParkingLot firstAvailableParkingLot = parkingLots.stream()
                 .filter(ParkingLot::isAvailable)
-                .max(Comparator.comparingDouble(ParkingLot::getOccupationRate)).orElse(null);
-        if (firstAvailableParkingLot == null) {
-            throw new NoAvailableException(NO_AVAILABLE_POSITION);
-        }
+                .max(Comparator.comparingDouble(ParkingLot::getOccupationRate))
+                .orElseThrow(() -> new NoAvailableException(NO_AVAILABLE_POSITION));;
         Ticket ticket = firstAvailableParkingLot.park(car);
         ticketToParkingLot.put(ticket, firstAvailableParkingLot);
         return ticket;

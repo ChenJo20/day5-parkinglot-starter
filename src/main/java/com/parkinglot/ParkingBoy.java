@@ -30,10 +30,8 @@ public class ParkingBoy {
         ParkingLot firstAvailableParkingLot = parkingLots.stream()
                 .filter(ParkingLot::isAvailable)
                 .sorted(sortStrategy.sortParkingLot())
-                .findFirst().orElse(null);
-        if (firstAvailableParkingLot == null) {
-            throw new NoAvailableException(NO_AVAILABLE_POSITION);
-        }
+                .findFirst()
+                .orElseThrow(() -> new NoAvailableException(NO_AVAILABLE_POSITION));
 
         Ticket ticket = firstAvailableParkingLot.park(car);
         ticketToParkingLot.put(ticket, firstAvailableParkingLot);
