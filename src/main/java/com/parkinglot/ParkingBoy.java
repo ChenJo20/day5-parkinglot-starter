@@ -14,22 +14,22 @@ import static com.parkinglot.ParkingLot.UNRECOGNIZED_PARKING_TICKET;
 public class ParkingBoy {
     protected List<ParkingLot> parkingLots = new ArrayList<>();
     protected Map<Ticket, ParkingLot> ticketToParkingLot = new HashMap<>();
-    private ParkingLotSortStrategy searchStrategy;
+    private ParkingLotSortStrategy sortStrategy;
 
     public ParkingBoy(List<ParkingLot> parkingLots) {
         this.parkingLots = parkingLots;
-        searchStrategy = new KeepInitialOrderStrategy();
+        sortStrategy = new KeepInitialOrderStrategy();
     }
 
-    public ParkingBoy(List<ParkingLot> parkingLots, ParkingLotSortStrategy searchStrategy) {
+    public ParkingBoy(List<ParkingLot> parkingLots, ParkingLotSortStrategy sortStrategy) {
         this.parkingLots = parkingLots;
-        this.searchStrategy = searchStrategy;
+        this.sortStrategy = sortStrategy;
     }
 
     public Ticket park(Car car) {
         ParkingLot firstAvailableParkingLot = parkingLots.stream()
                 .filter(ParkingLot::isAvailable)
-                .sorted(searchStrategy.sortParkingLot())
+                .sorted(sortStrategy.sortParkingLot())
                 .findFirst().orElse(null);
         if (firstAvailableParkingLot == null) {
             throw new NoAvailableException(NO_AVAILABLE_POSITION);
