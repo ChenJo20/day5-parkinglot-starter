@@ -8,41 +8,41 @@ public class ParkingLot {
     public static final String UNRECOGNIZED_PARKING_TICKET = "Unrecognized parking ticket";
     public static final int DEFAULT_CAPABILITY = 10;
     private int capacity;
-    private int restSlotNum;
+    private int restPositionNum;
     private final Map<Ticket, Car> ticketToCar = new HashMap<>();
 
     public ParkingLot() {
         capacity = DEFAULT_CAPABILITY;
-        restSlotNum = DEFAULT_CAPABILITY;
+        restPositionNum = DEFAULT_CAPABILITY;
     }
 
     public ParkingLot(int capacity) {
         this.capacity = capacity;
-        restSlotNum = capacity;
+        restPositionNum = capacity;
     }
 
     public Ticket park(Car car) {
         Ticket ticket = new Ticket();
         ticketToCar.put(ticket, car);
-        restSlotNum--;
+        restPositionNum--;
         return ticket;
     }
 
     public Car fetch(Ticket ticket) {
         Car fetchedCar = ticketToCar.remove(ticket);
-        restSlotNum++;
+        restPositionNum++;
         return fetchedCar;
     }
 
     public boolean isAvailable() {
-        return restSlotNum != 0;
+        return restPositionNum != 0;
     }
 
-    public int getRestSlotNum() {
-        return restSlotNum;
+    public int getRestPositionNum() {
+        return restPositionNum;
     }
 
     public double getOccupationRate() {
-        return (double) restSlotNum / capacity;
+        return (double) restPositionNum / capacity;
     }
 }

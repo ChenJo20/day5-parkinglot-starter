@@ -8,6 +8,6 @@ public class MaxAvailablePositionsStrategy implements ParkingLotSortStrategy {
 
     @Override
     public Comparator<ParkingLot> sortParkingLot() {
-        return Comparator.comparing(ParkingLot::getRestSlotNum).reversed();
+        return Comparator.comparing(ParkingLot::getRestPositionNum).reversed();
     }
 }

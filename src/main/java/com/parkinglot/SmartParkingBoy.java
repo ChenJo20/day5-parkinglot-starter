@@ -14,7 +14,7 @@ public class SmartParkingBoy extends ParkingBoy {
     public Ticket park(Car car) {
         ParkingLot firstAvailableParkingLot = parkingLots.stream()
                 .filter(ParkingLot::isAvailable)
-                .sorted(Comparator.comparingInt(ParkingLot::getRestSlotNum).reversed())
+                .sorted(Comparator.comparingInt(ParkingLot::getRestPositionNum).reversed())
                 .findFirst().orElse(null);
         if (firstAvailableParkingLot == null) {
             throw new NoAvailableException(NO_AVAILABLE_POSITION);
